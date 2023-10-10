@@ -1,6 +1,5 @@
-//module------------------------------------
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js';
 const firebaseConfig = {
   apiKey: "AIzaSyALwMl3_dVbqky2Or9VAGOKF8QfCUMZ_1U",
   authDomain: "fire-8eb59.firebaseapp.com",
@@ -16,10 +15,26 @@ initializeApp(firebaseConfig);
 const auth = getAuth()
 
 
+export const Signup = async (user)=>{
+   try{
+    const {user: {uid}} = await createUserWithEmailAndPassword(auth, user.email, user.password)
+    return{
+      success: true,
+      user : {
+        id : uid
+      }
+    }
+   }
+   catch(error){
+      return{
+        success: false,
+        error 
+      }
+   }
+}
 
-//selector---------------------------------
 
 
 
 
-//function---------------------------------
+
